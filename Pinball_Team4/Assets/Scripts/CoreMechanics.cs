@@ -14,7 +14,7 @@ public class CoreMechanics : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rgBall.angularVelocity = new Vector2(0, rgBall.angularVelocity.y);
+       // rgBall.angularVelocity = new Vector2(0, rgBall.angularVelocity.y);
     }
 
     private void OnCollisionEnter(Collision Wall)
