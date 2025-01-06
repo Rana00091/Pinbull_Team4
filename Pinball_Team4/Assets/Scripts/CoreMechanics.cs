@@ -32,17 +32,17 @@ public class CoreMechanics : MonoBehaviour
         }
     }
     private void Speedy() {
-        Vector2 direction = rgBall.velocity.normalized;
-        float newSpeed = rgBall.velocity.magnitude * 1.5f; // Use 1.5f for float literal
-        rgBall.velocity = direction * newSpeed;
+        Vector2 direction = rgBall.linearVelocity.normalized;
+        float newSpeed = rgBall.linearVelocity.magnitude * 1.5f; // Use 1.5f for float literal
+        rgBall.linearVelocity = direction * newSpeed;
         Debug.Log("Speed increased!");
 
     }
     private void Slow() {
 
-        Vector2 direction = rgBall.velocity.normalized;
-        float newSpeed = rgBall.velocity.magnitude * 0.5f;
-        rgBall.velocity = direction * newSpeed;
+        Vector2 direction = rgBall.linearVelocity.normalized;
+        float newSpeed = rgBall.linearVelocity.magnitude * 0.5f;
+        rgBall.linearVelocity = direction * newSpeed;
     }
     private void Spring() {
 
