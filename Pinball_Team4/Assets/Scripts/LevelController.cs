@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class LevelController : MonoBehaviour
 {
@@ -16,8 +17,10 @@ public class LevelController : MonoBehaviour
     [Header ("referance")]
     public Canvas gameplayCanvas;
     AudioManager audioManager;
-   // [SerializeField] GameObject Playerprefab;
+    [SerializeField] GameObject Playerprefab;
     LevelLoader levelLoader;
+    [SerializeField] public Vector3 resPos;
+    Ball ball;
 
     
 
@@ -28,7 +31,7 @@ public class LevelController : MonoBehaviour
     [SerializeField] TMP_Text LoseText;
     [SerializeField] TMP_Text LevelText;
     int sceneLevel = 1;
-
+    private Color originalColor;
     
      
 
@@ -38,21 +41,22 @@ public class LevelController : MonoBehaviour
      
     
     private void Awake() {
-
-        LevelController[] objct = Object.FindObjectsOfType<LevelController>();
+        
+        /*LevelController[] objct = Object.FindObjectsOfType<LevelController>();
 
         if (objct.Length > 1){
             Destroy(gameObject);
-        }
+        }*/
 
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
     }
 
     private void Start() {
 
-        levelLoader = GameObject.FindObjectOfType<LevelLoader>();
-
-        //audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+        //levelLoader = GameObject.FindObjectOfType<LevelLoader>();
+        ball = FindAnyObjectByType<Ball>();
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+         originalColor = scoreText.color;
         
         //levelnum =levelLoader.sceneLevel;
     }
@@ -75,10 +79,35 @@ public class LevelController : MonoBehaviour
  
          public void Increase ()
             {
-                score ++ ; 
+                if(score < 2000){
+                score +=100 ; 
                 scoreText.text =score.ToString();
+                scoreText.color = Color.green;
+                StartCoroutine(ResetColor());
+                CheckWin();
+                }
+        
 
             }
+            public void Increase500 ()
+            {
+                if(score < 2000){
+                score +=500 ; 
+                scoreText.text =score.ToString();
+                scoreText.color = Color.yellow;
+                StartCoroutine(ResetColor());
+                CheckWin();
+                }
+             
+
+            }
+
+        public void CheckWin(){
+            if (score == 2000) {
+            WinStatment();}
+
+            else{return;}
+        }
         public void DecreaseLife (){
         
             lifecount -- ;
@@ -94,7 +123,7 @@ public class LevelController : MonoBehaviour
             }
             if(lifecount > 0){
 
-                RespawnPlayer(); 
+                 Invoke("RespawnPlayer", 2f); 
             }
 
 
@@ -102,21 +131,23 @@ public class LevelController : MonoBehaviour
 
     public void WinStatment(){
 
-          //  audioManager.PlayeMewo(audioManager.Win);
+           audioManager.PlayeSFX(audioManager.Win);
             winText.gameObject.SetActive(true);
-
+            Destroy(ball.gameObject);
+            Invoke("LoadEndGame", 2f);
              Invoke("HideText", 2f);
+
     }
 
     public void LoseStatment(){
-       // audioManager.PlayeMewo(audioManager.mewoDieClip);
+        audioManager.PlayeSFX(audioManager.DieClip);
         LoseText.gameObject.SetActive(true);
 
         Invoke("LoadEndGame", 2f);
         Invoke("HideText", 2f);
     }
     private void LoadEndGame(){
-        //SceneManager.LoadScene("EndGame");
+        SceneManager.LoadScene("EndGame");
 
 
     }
@@ -129,8 +160,14 @@ public class LevelController : MonoBehaviour
     }
 
     private void RespawnPlayer(){
-        Vector3 resPos = new Vector3(0, -1, 0);
-       // Instantiate(Playerprefab , resPos , Quaternion.identity);
+         
+        Instantiate(Playerprefab , resPos , Quaternion.identity);
 
+    }
+
+    IEnumerator ResetColor()
+    {
+        yield return new WaitForSeconds(0.5f); 
+        scoreText.color = originalColor;     
     }
 }

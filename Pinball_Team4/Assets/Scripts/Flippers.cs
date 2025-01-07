@@ -11,6 +11,7 @@ public class Flippers : MonoBehaviour
 
             GetComponent<HingeJoint2D>().useMotor = true;
         }
+        
         else {
             GetComponent<HingeJoint2D>().useMotor = false;
         }

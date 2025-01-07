@@ -16,6 +16,8 @@ public class AudioManager : MonoBehaviour
     /// </summary>
     /// 
 
+    
+
     [Header("Audio Source")]
 
     [SerializeField] AudioSource backgroundMusic;
@@ -25,15 +27,21 @@ public class AudioManager : MonoBehaviour
 
     [Header("Audio Clip")]
     [SerializeField] AudioClip backgroundMusicClip;
-    public AudioClip slimeClip;
+   // public AudioClip slimeClip;
     public AudioClip DieClip;
+    
     public AudioClip Win ;
     public AudioClip Fire ;
+    public AudioClip Coin;
+
+    public AudioClip Click;
+
     
-    
+     
 
     void Start()
     {
+        //Play background music  with low volume
         backgroundMusic.clip = backgroundMusicClip ;
         backgroundMusic.volume = 0.3f ;
         backgroundMusic.Play();
@@ -41,9 +49,11 @@ public class AudioManager : MonoBehaviour
     }
 
    public void PlayeSFX (AudioClip clip){
+
+        // only playes effects 
        
         SFX.PlayOneShot(clip);
-        // only playes effects 
+        
 
    }
 

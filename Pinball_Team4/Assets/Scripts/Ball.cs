@@ -5,8 +5,8 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
 
-    //LevelController levelController ;
-   // AudioManager audioManager;
+    LevelController levelController ;
+    AudioManager audioManager;
     Rigidbody2D Rb;
     //[SerializeField] ParticleSystem particleSystemfire;
 
@@ -16,8 +16,8 @@ public class Ball : MonoBehaviour
         
 
 
-        //levelController = FindAnyObjectByType<LevelController>();
-//        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+        levelController = FindAnyObjectByType<LevelController>();
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         Rb = GetComponent<Rigidbody2D>();
 
         //[Stops prefab for player]
@@ -52,30 +52,51 @@ public class Ball : MonoBehaviour
         particleSystemfire.Stop();
     }
 */
-/*
+
     private void OnCollisionEnter2D(Collision2D other) {
 
-     
+        if(other.gameObject.tag == "Score500"){
+        audioManager.PlayeSFX(audioManager.Coin);
+        levelController.Increase500();
+        }
 
-     if(other.gameObject.tag == "Briks"){
-      levelController.Increase();
-     }
+        if(other.gameObject.tag == "Score100"){
+            audioManager.PlayeSFX(audioManager.Coin);
+        levelController.Increase();
+        }
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
 
-       
-        //audioManager.SFX
-        levelController.DecreaseLife();
-        Destroy(gameObject);
-
-    }
-    */
+    
     IEnumerator DelayStart(){
         //delay the stat of object # can be used with the spring effect 
         yield return new WaitForSeconds(0);
         //GetComponent<Rigidbody2D>().AddForce(new Vector2(250f, 250f));
-        Rb.AddForce(new Vector2(0f, 60f), ForceMode2D.Impulse);
+        Rb.AddForce(new Vector2(0f, 55f), ForceMode2D.Impulse);
+
+    }
+
+    
+
+        private void OnTriggerEnter2D(Collider2D other) {
+            if(other.gameObject.tag =="Spring"){
+                audioManager.PlayeSFX(audioManager.Fire);
+                 Rb.AddForce(new Vector2(0f, 100f), ForceMode2D.Impulse);
+                  
+
+               
+            }
+
+            if(other.gameObject.tag=="Die"){
+
+                audioManager.PlayeSFX(audioManager.DieClip);
+                Destroy(gameObject);
+                levelController.DecreaseLife();
+                
+            }
+       
+        //audioManager.SFX
+       
 
     }
 
