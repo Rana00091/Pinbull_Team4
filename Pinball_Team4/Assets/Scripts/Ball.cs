@@ -13,6 +13,9 @@ public class Ball : MonoBehaviour
     
     void Start()
     {   
+        
+
+
         //levelController = FindAnyObjectByType<LevelController>();
 //        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         Rb = GetComponent<Rigidbody2D>();
@@ -20,7 +23,7 @@ public class Ball : MonoBehaviour
         //[Stops prefab for player]
         //particleSystemfire.Stop();
 
-        StartCoroutine(DelayStart());
+       StartCoroutine(DelayStart());
         
         
     }
@@ -70,9 +73,9 @@ public class Ball : MonoBehaviour
     */
     IEnumerator DelayStart(){
         //delay the stat of object # can be used with the spring effect 
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0);
         //GetComponent<Rigidbody2D>().AddForce(new Vector2(250f, 250f));
-        Rb.AddForce(new Vector2(0f, 50f), ForceMode2D.Impulse);
+        Rb.AddForce(new Vector2(0f, 60f), ForceMode2D.Impulse);
 
     }
 
