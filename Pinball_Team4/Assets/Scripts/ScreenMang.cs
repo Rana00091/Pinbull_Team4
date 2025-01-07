@@ -38,7 +38,7 @@ public class ScreenMang : MonoBehaviour
 
    public void onclickExite(){
       audioManager.PlayeSFX(audioManager.Click);
-      UnityEditor.EditorApplication.isPlaying = false;
+      //UnityEditor.EditorApplication.isPlaying = false;
        Application.Quit();
    }
     

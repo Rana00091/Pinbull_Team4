@@ -79,35 +79,52 @@ public class LevelController : MonoBehaviour
  
          public void Increase ()
             {
+                CheckWin();
                 if(score < 2000){
                 score +=100 ; 
                 scoreText.text =score.ToString();
                 scoreText.color = Color.green;
                 StartCoroutine(ResetColor());
-                CheckWin();
+            
                 }
         
 
             }
             public void Increase500 ()
             {
+                CheckWin();
                 if(score < 2000){
                 score +=500 ; 
                 scoreText.text =score.ToString();
                 scoreText.color = Color.yellow;
                 StartCoroutine(ResetColor());
-                CheckWin();
+                
                 }
              
 
             }
 
         public void CheckWin(){
-            if (score == 2000) {
-            WinStatment();}
+            if (score >= 2000) {
+
+            WinStatment();
+
+            }
 
             else{return;}
         }
+
+           public void WinStatment(){
+
+           audioManager.PlayeSFX(audioManager.Win);
+           //Destroy(ball.gameObject);
+           //Destroy(Playerprefab.gameObject);
+            winText.gameObject.SetActive(true);
+            
+            Invoke("LoadEndGame", 1f);
+             Invoke("HideText", 1f);
+
+    }
         public void DecreaseLife (){
         
             lifecount -- ;
@@ -129,15 +146,7 @@ public class LevelController : MonoBehaviour
 
     }
 
-    public void WinStatment(){
-
-           audioManager.PlayeSFX(audioManager.Win);
-            winText.gameObject.SetActive(true);
-            Destroy(ball.gameObject);
-            Invoke("LoadEndGame", 2f);
-             Invoke("HideText", 2f);
-
-    }
+ 
 
     public void LoseStatment(){
         audioManager.PlayeSFX(audioManager.DieClip);
