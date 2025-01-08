@@ -4,7 +4,7 @@ using UnityEngine;
 namespace PinBall
 {
     public class CoreMechanics : MonoBehaviour
-    {/*
+    {
         [SerializeField] private Life lifeRef; // Reference to the Life component
         [SerializeField] private GameObject myBall; // Reference to the ball GameObject
         private Rigidbody2D RgBall; // Rigidbody2D component of the ball
@@ -109,5 +109,5 @@ namespace PinBall
             RgBall.AddForce(-spring.contacts[0].normal * springForce, ForceMode2D.Impulse);
             Debug.Log("Spring force applied!");
         }
-    */}
+    }
 }
