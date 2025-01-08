@@ -2,18 +2,24 @@ using UnityEngine;
 
 public class Flippers : MonoBehaviour
 {
-  public bool Fliper;
+    public bool Right;
+    public bool Left;
 
-    
     void Update()
     {
-        if((Fliper && Input.GetKey(KeyCode.A)) || (!Fliper && Input.GetKey(KeyCode.D))){
+        switch (true)
+        {
+            case true when Left && Input.GetKey(KeyCode.A):
+                GetComponent<HingeJoint2D>().useMotor = true;
+                break;
 
-            GetComponent<HingeJoint2D>().useMotor = true;
-        }
-        
-        else {
-            GetComponent<HingeJoint2D>().useMotor = false;
+            case true when Right && Input.GetKey(KeyCode.D):
+                GetComponent<HingeJoint2D>().useMotor = true;
+                break;
+
+            default:
+                GetComponent<HingeJoint2D>().useMotor = false;
+                break;
         }
     }
 }

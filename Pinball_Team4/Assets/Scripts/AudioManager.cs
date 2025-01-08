@@ -43,7 +43,7 @@ public class AudioManager : MonoBehaviour
     {
         //Play background music  with low volume
         backgroundMusic.clip = backgroundMusicClip ;
-        backgroundMusic.volume = 0.3f ;
+        backgroundMusic.volume = 0.1f ;
         backgroundMusic.Play();
 
     }
