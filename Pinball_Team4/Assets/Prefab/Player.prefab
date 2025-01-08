@@ -80,8 +80,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.93965435, g: 1, b: 0.24213827, a: 1}
+  m_Sprite: {fileID: -2792402802363126846, guid: 0fd8ebdefe7fb43419ca806cde088ca3, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -166,6 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d6676f21698bbe40bc0435a2aeacb57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shoot: 0
 --- !u!114 &7571692903759250806
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,12 +174,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4870110636406874985}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1f8c3ccf6bad6d6489630d784a5c95bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ball: {fileID: 4870110636406874985}
-  springForce: 6
-  Speed: 30
-  slowSpeed: 0.5
+  springForce: 4
+  speedMultiplier: 3
+  slowMultiplier: 0.5
+  launchForce: 60
+  launchImpulseX: 200
+  launchImpulseY: 200

@@ -97,6 +97,7 @@ public class Ball : MonoBehaviour
                
             }
 
+
             if(other.gameObject.tag=="Die"){
 
                 audioManager.PlayeSFX(audioManager.DieClip);
