@@ -12,6 +12,7 @@ TagManager:
   - Die
   - Score500
   - Shoot
+  - Slow
   layers:
   - Default
   - TransparentFX
