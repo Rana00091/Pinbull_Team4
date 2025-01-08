@@ -20,7 +20,7 @@ public class LevelController : MonoBehaviour
     [SerializeField] GameObject Playerprefab;
     LevelLoader levelLoader;
     [SerializeField] public Vector3 resPos;
-    Ball ball;
+    
 
     
 
@@ -41,6 +41,8 @@ public class LevelController : MonoBehaviour
      
     
     private void Awake() {
+
+       
         
         /*LevelController[] objct = Object.FindObjectsOfType<LevelController>();
 
@@ -54,7 +56,7 @@ public class LevelController : MonoBehaviour
     private void Start() {
 
         //levelLoader = GameObject.FindObjectOfType<LevelLoader>();
-        ball = FindAnyObjectByType<Ball>();
+        
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
          originalColor = scoreText.color;
         
@@ -107,7 +109,13 @@ public class LevelController : MonoBehaviour
         public void CheckWin(){
             if (score >= 2000) {
 
-            WinStatment();
+                Ball ball = FindObjectOfType<Ball>();
+                 if(ball !=null){
+
+                        Destroy(ball.gameObject);
+                    }
+
+                WinStatment();
 
             }
 
@@ -117,12 +125,12 @@ public class LevelController : MonoBehaviour
            public void WinStatment(){
 
            audioManager.PlayeSFX(audioManager.Win);
-           //Destroy(ball.gameObject);
+           
            //Destroy(Playerprefab.gameObject);
             winText.gameObject.SetActive(true);
             
-            Invoke("LoadEndGame", 1f);
-             Invoke("HideText", 1f);
+            Invoke("LoadEndGame", 2f);
+             Invoke("HideText", 2f);
 
     }
         public void DecreaseLife (){
