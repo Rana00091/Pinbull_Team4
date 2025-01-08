@@ -8,6 +8,7 @@ public class Ball : MonoBehaviour
     LevelController levelController ;
     AudioManager audioManager;
     Rigidbody2D Rb;
+    [SerializeField] bool shoot;
     //[SerializeField] ParticleSystem particleSystemfire;
 
     
@@ -28,11 +29,14 @@ public class Ball : MonoBehaviour
         
     }
 
-    void Update(){
+    void Update()
+    {
 
-       if (
-            Input.GetKeyDown("space")){
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(200f, 200f));
+      /* if (Input.GetKeyDown("space")){
+
+            Rb.AddForce(new Vector2(0f, 60f), ForceMode2D.Impulse);
+            
+           
 
             //[Start prefab if needed]
             //particleSystemfire.Play();
@@ -40,6 +44,7 @@ public class Ball : MonoBehaviour
 
           // StartCoroutine(StopFireEffectAfterDelay());
        }
+       */
           
        
     }
@@ -54,6 +59,10 @@ public class Ball : MonoBehaviour
 */
 
     private void OnCollisionEnter2D(Collision2D other) {
+
+        /*if (other.gameObject.CompareTag("Shoot")) {
+            shoot = true;
+        }*/
 
         if(other.gameObject.tag == "Score500"){
         audioManager.PlayeSFX(audioManager.Coin);
@@ -70,7 +79,7 @@ public class Ball : MonoBehaviour
     
     IEnumerator DelayStart(){
         //delay the stat of object # can be used with the spring effect 
-        yield return new WaitForSeconds(0);
+        yield return new WaitForSeconds(2);
         //GetComponent<Rigidbody2D>().AddForce(new Vector2(250f, 250f));
         Rb.AddForce(new Vector2(0f, 55f), ForceMode2D.Impulse);
 
@@ -79,6 +88,7 @@ public class Ball : MonoBehaviour
     
 
         private void OnTriggerEnter2D(Collider2D other) {
+
             if(other.gameObject.tag =="Spring"){
                 audioManager.PlayeSFX(audioManager.Fire);
                  Rb.AddForce(new Vector2(0f, 100f), ForceMode2D.Impulse);
@@ -95,7 +105,7 @@ public class Ball : MonoBehaviour
                 
             }
        
-        //audioManager.SFX
+        
        
 
     }
